@@ -17,7 +17,7 @@ public class FirstRatings {
         CSVParser parser = null;
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
         ArrayList<Movie> movies = new ArrayList<Movie>();
-        fileReader = new FileReader("/home/ben/Desktop/StepOneStarterProgram/data/" + filename);
+        fileReader = new FileReader("/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/" + filename);
         parser = new CSVParser(fileReader, csvFileFormat);
         List<CSVRecord> csvRecords = parser.getRecords();
         
@@ -38,25 +38,25 @@ public class FirstRatings {
         return movies;
     }
     
-    public HashMap<String, Rater> loadRater(String filename) throws Exception {
+    public HashMap<String, EfficientRater> loadRater(String filename) throws Exception {
         //ArrayList<Rater> raters = new ArrayList<Rater>();
         String [] FILE_HEADER_MAPPING = {"rater_id","movie_id","rating","time"};
         FileReader fileReader = null;
         CSVParser parser = null;
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
-        fileReader = new FileReader("/home/ben/Desktop/StepOneStarterProgram/data/" + filename);
+        fileReader = new FileReader("/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/" + filename);
         parser = new CSVParser(fileReader, csvFileFormat);
         List<CSVRecord> csvRecords = parser.getRecords();
-        HashMap<String, Rater> raters = new HashMap<String, Rater>();
+        HashMap<String, EfficientRater> raters = new HashMap<String, EfficientRater>();
         
         for (int i = 1; i < csvRecords.size(); i++) {
             CSVRecord record = csvRecords.get(i);
             String raterID = record.get("rater_id");
             String movieID = record.get("movie_id");
             Double rating = Double.parseDouble(record.get("rating"));
-            Rater rater = null;
+            EfficientRater rater = null;
             if (!raters.containsKey(raterID)) {
-                rater = new Rater(raterID);
+                rater = new EfficientRater(raterID);
                 rater.addRating(movieID, rating);
                 raters.put(raterID, rater);
             } else {
@@ -71,7 +71,7 @@ public class FirstRatings {
     
     public void testLoadRater() throws Exception{
         String fileName = "ratings.csv";
-        HashMap<String, Rater> raters = loadRater(fileName);  
+        HashMap<String, EfficientRater> raters = loadRater(fileName);  
         System.out.println("There werw " + raters.size() + " raters.");
         String specRater = "193";
         ArrayList<String> maxRaters = maxRatings(raters);
@@ -107,7 +107,7 @@ public class FirstRatings {
         System.out.println("There were " + uniqueMovs.size() + " movies rated.");
     }
     
-    private ArrayList<String> maxRatings(HashMap<String, Rater> map) {
+    private ArrayList<String> maxRatings(HashMap<String, EfficientRater> map) {
         ArrayList<String> maxRaters = null;
         int max = 0;
         

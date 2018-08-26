@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=MovieRunnerWithFilters
+comment1.params=
+comment1.target=void\ printAverageRatings()
+comment2.params=
+comment2.target=void\ printAverageRatingsByYear()
+comment3.params=
+comment3.target=void\ printAverageRatingsByGenre()
+comment4.params=
+comment4.target=void\ printAverageRatingsByMinutes()
+comment5.params=
+comment5.target=void\ printAverageRatingsByDirector()
+comment6.params=
+comment6.target=void\ printAverageRatingsByMulitpleFilters()
+comment7.params=
+comment7.target=void\ printAverageRatingsByYearAndGenre()
+comment8.params=
+comment8.target=void\ printAverageRatingsByDirectorAndMinutes()
+numComments=9

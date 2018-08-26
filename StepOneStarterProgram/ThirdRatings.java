@@ -1,6 +1,6 @@
 
 /**
- * Write a description of SecondRatings here.
+ * Write a description of ThirdRatings here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -8,49 +8,30 @@
 
 import java.util.*;
 
-public class SecondRatings {
-    private ArrayList<Movie> myMovies;
+public class ThirdRatings {
     private HashMap<String, EfficientRater> myRaters;
     
-    public SecondRatings() throws Exception {
+    public ThirdRatings() throws Exception {
         // default constructor
-        this("ratedmoviesfull.csv", "ratings.csv");
+        this("ratings.csv");
     }
     
-    public SecondRatings(String moviefile, String ratingsfile) throws Exception{
+    public ThirdRatings(String ratingsfile) throws Exception{
         FirstRatings fr = new FirstRatings();
-        myMovies = fr.loadMovies(moviefile);
         myRaters = fr.loadRater(ratingsfile);
     }
     
-    public int getMovieSize() {
-        return myMovies.size();
-    }
-    
+        
     public int getRatersSize() {
         return myRaters.size();
     }
-    
-    public String getID(String title) {
-        String answer = "NO SUCH TITLE.";
-        
-        for (int i = 0; i < myMovies.size(); i++) {
-            Movie m = myMovies.get(i);
-            if (title.equals(m.getTitle())) {
-                answer = m.getID();
-                break;
-            }
-        }
-        
-        return answer;
-    }
-    
+            
     public ArrayList<Rating> getAverageRatings(int minimalRaters) {
         ArrayList<Rating> qualRatings = new ArrayList<Rating>();
-        Iterator<Movie> itr = myMovies.iterator();
+        ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());
+        Iterator<String> itr = movies.iterator();
         while (itr.hasNext()) {
-            Movie m = itr.next();
-            String id = m.getID();
+            String id = itr.next();
             double score = getAverageByID(id, minimalRaters);
             if (score != 0.0) {
                 Rating r = new Rating(id, score);
@@ -61,19 +42,22 @@ public class SecondRatings {
         return qualRatings;
     }
     
-    public String getTitle(String id) {
-        String title = "ID not found";
-        Iterator<Movie> itr = myMovies.iterator();
+    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria) {
+        ArrayList<Rating> qualRatings = new ArrayList<Rating>();
+        //create a string array list of movies using the filter, then calcuate the averages
+        ArrayList<String> afterFilter = MovieDatabase.filterBy(filterCriteria);
+        Iterator<String> itr = afterFilter.iterator();
         while (itr.hasNext()) {
-            Movie m = itr.next();
-            String curID = m.getID();
-            if (curID.equals(id)) {
-                title = m.getTitle();
+            String id = itr.next();
+            double score = getAverageByID(id, minimalRaters);
+            if (score != 0.0) {
+                Rating r = new Rating(id, score);
+                qualRatings.add(r);
             }
         }
-        
-        return title;
+        return qualRatings;
     }
+    
     
     public double getAverageByID(String id, int minimalRaters) {
         double scoreCount = 0.0;
@@ -91,5 +75,4 @@ public class SecondRatings {
             return 0.0;
         }
     }
-    
 }
