@@ -11,8 +11,8 @@ public class MovieRunnerSimilarRatings {
        
     public void printAverageRatings() throws Exception {
         int min = 2;
-        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings_short.csv";
-        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmovies_short.csv";
+        String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings_short.csv";
+        String movies = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratedmovies_short.csv";
         
         RaterDatabase.addRatings(ratings);
         MovieDatabase.initialize(movies);
@@ -32,8 +32,8 @@ public class MovieRunnerSimilarRatings {
     
     public void printAverageRatingsByYearAndGenre() throws Exception {
         int min = 8;
-        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings.csv";
-        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmoviesfull.csv";
+        String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings.csv";
+        String movies = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratedmoviesfull.csv";
         
         RaterDatabase.addRatings(ratings);
         MovieDatabase.initialize(movies);
@@ -61,7 +61,25 @@ public class MovieRunnerSimilarRatings {
                 
     }
     
-    private ArrayList<Rating> getSimilarities(String id) 
+    private ArrayList<Rating> getSimilarities(String id) {
+        ArrayList<Rating> similarRaters = new ArrayList<Rating>();
+        ArrayList<Rater> raters = RaterDatabase.getRaters();
+        
+        for (Rater r : raters) {
+            String curRater = r.getID();
+            if (!curRater.equals(id)) {
+                int sim = dotProduct(RaterDatabase.getRater(id), RaterDatabase.getRater(curRater));
+                if (sim >= 0) {
+                    Rating newRating = new Rating(curRater, (double) sim);
+                    similarRaters.add(newRating);
+                }
+            }
+        }
+        
+        
+        Collections.sort(similarRaters);
+        return similarRaters;
+    }
     
     private int dotProduct(Rater me, Rater r) {
             int answer = 0;
