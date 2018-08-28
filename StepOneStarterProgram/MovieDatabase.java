@@ -4,7 +4,7 @@ import edu.duke.FileResource;
 import java.io.*;
 
 public class MovieDatabase {
-    public static HashMap<String, Movie> ourMovies;
+    private static HashMap<String, Movie> ourMovies;
 
     public static void initialize(String moviefile) {
         if (ourMovies == null) {
@@ -24,6 +24,7 @@ public class MovieDatabase {
     private static void loadMovies(String filename) {
         FirstRatings fr = new FirstRatings();
         ArrayList<Movie> list = null;
+        System.out.println(filename);
         try {
             list = fr.loadMovies(filename);
         }

@@ -10,13 +10,13 @@ import java.util.*;
 public class MovieRunnerWithFilters {
 
     public void printAverageRatings() throws Exception {
-        int min = 35;
-        String ratings = "ratings.csv";
-        String movies = "ratedmoviesfull.csv";
+        int min = 2;
+        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings_short.csv";
+        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmovies_short.csv";
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         
         ArrayList<Rating> qualRatings = tr.getAverageRatings(min);
@@ -37,7 +37,7 @@ public class MovieRunnerWithFilters {
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         Filter filter = new YearAfterFilter(year);
         
@@ -60,7 +60,7 @@ public class MovieRunnerWithFilters {
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         Filter filter = new GenreFilter(genre);
         
@@ -84,7 +84,7 @@ public class MovieRunnerWithFilters {
               
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         Filter filter = new MinutesFilter(minTime, maxTime);
         
@@ -107,7 +107,7 @@ public class MovieRunnerWithFilters {
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         Filter filter = new DirectorsFilter(director);
         
@@ -129,7 +129,7 @@ public class MovieRunnerWithFilters {
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         
         Filter director = new DirectorsFilter("Spike Jonze");
@@ -158,12 +158,12 @@ public class MovieRunnerWithFilters {
     
     public void printAverageRatingsByYearAndGenre() throws Exception {
         int min = 8;
-        String ratings = "ratings.csv";
-        String movies = "ratedmoviesfull.csv";
+        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings.csv";
+        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmoviesfull.csv";
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         
         Filter genre = new GenreFilter("Drama");
@@ -188,12 +188,12 @@ public class MovieRunnerWithFilters {
     
     public void printAverageRatingsByDirectorAndMinutes() throws Exception {
         int min = 1;
-        String ratings = "ratings.csv";
+        String ratings = "ratings_short.csv";
         String movies = "ratedmoviesfull.csv";
         
         MovieDatabase.initialize(movies);
         ThirdRatings tr = new ThirdRatings(ratings);
-        System.out.println("There are " + MovieDatabase.ourMovies.size() + " movies.");
+        System.out.println("There are " + MovieDatabase.size() + " movies.");
         System.out.println("There are " + tr.getRatersSize() + " raters.");
         
         Filter director = new DirectorsFilter("Clint Eastwood,Joel Coen,Tim Burton,Ron Howard,Nora Ephron,Sydney Pollack");

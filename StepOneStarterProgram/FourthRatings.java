@@ -9,11 +9,12 @@ import java.util.*;
 
 public class FourthRatings {
     
+       
     public double getAverageByID(String id, int minimalRaters) {
         double scoreCount = 0.0;
         double rateCount = 0.0;
-        RaterDatabase.intitialize(
-        for (Rater r : myRaters.values()) {
+        ArrayList<Rater> myRaters = RaterDatabase.getRaters();
+        for (Rater r : myRaters) {
             if (r.hasRating(id)) {
                 scoreCount += r.getRating(id);
                 rateCount++;

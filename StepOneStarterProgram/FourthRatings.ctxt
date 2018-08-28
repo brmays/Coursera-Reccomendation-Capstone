@@ -1,3 +1,9 @@
 #BlueJ class context
 comment0.target=FourthRatings
-numComments=1
+comment1.params=id\ minimalRaters
+comment1.target=double\ getAverageByID(java.lang.String,\ int)
+comment2.params=minimalRaters
+comment2.target=java.util.ArrayList\ getAverageRatings(int)
+comment3.params=minimalRaters\ filterCriteria
+comment3.target=java.util.ArrayList\ getAverageRatingsByFilter(int,\ Filter)
+numComments=4

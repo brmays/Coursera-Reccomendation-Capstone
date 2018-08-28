@@ -17,7 +17,7 @@ public class FirstRatings {
         CSVParser parser = null;
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
         ArrayList<Movie> movies = new ArrayList<Movie>();
-        fileReader = new FileReader("/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/" + filename);
+        fileReader = new FileReader(filename);
         parser = new CSVParser(fileReader, csvFileFormat);
         List<CSVRecord> csvRecords = parser.getRecords();
         
@@ -44,7 +44,7 @@ public class FirstRatings {
         FileReader fileReader = null;
         CSVParser parser = null;
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
-        fileReader = new FileReader("/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/" + filename);
+        fileReader = new FileReader(filename);
         parser = new CSVParser(fileReader, csvFileFormat);
         List<CSVRecord> csvRecords = parser.getRecords();
         HashMap<String, EfficientRater> raters = new HashMap<String, EfficientRater>();
