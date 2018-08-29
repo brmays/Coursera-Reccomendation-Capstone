@@ -61,36 +61,5 @@ public class MovieRunnerSimilarRatings {
                 
     }
     
-    private ArrayList<Rating> getSimilarities(String id) {
-        ArrayList<Rating> similarRaters = new ArrayList<Rating>();
-        ArrayList<Rater> raters = RaterDatabase.getRaters();
-        
-        for (Rater r : raters) {
-            String curRater = r.getID();
-            if (!curRater.equals(id)) {
-                int sim = dotProduct(RaterDatabase.getRater(id), RaterDatabase.getRater(curRater));
-                if (sim >= 0) {
-                    Rating newRating = new Rating(curRater, (double) sim);
-                    similarRaters.add(newRating);
-                }
-            }
-        }
-        
-        
-        Collections.sort(similarRaters);
-        return similarRaters;
-    }
     
-    private int dotProduct(Rater me, Rater r) {
-            int answer = 0;
-            ArrayList<String> myRatedMovies = me.getItemsRated();
-            
-            for (String item : myRatedMovies) {
-                if (r.hasRating(item)) {
-                    answer += ((me.getRating(item) - 5) * (r.getRating(item) - 5));
-                }
-            }
-            
-            return answer;
-        }
 }
