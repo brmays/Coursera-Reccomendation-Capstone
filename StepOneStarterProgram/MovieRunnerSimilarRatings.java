@@ -9,6 +9,29 @@ import java.util.*;
 
 public class MovieRunnerSimilarRatings {
        
+    public void printSimilarRatings() throws Exception {
+        String raterID = "65";
+        int simRaters = 20;
+        int minRatings = 5;
+        
+        //String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings_short.csv";
+        //String movies = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratedmovies_short.csv";
+        
+        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings.csv";
+        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmoviesfull.csv";
+        
+        RaterDatabase.addRatings(ratings);
+        MovieDatabase.initialize(movies);
+        FourthRatings fr = new FourthRatings();
+        ArrayList<Rating> recMovies = fr.getSimilarRatings(raterID, simRaters, minRatings);
+        
+        System.out.println("The following movies are reccommended for Rater number: " + raterID);
+        
+        for (Rating r : recMovies) {
+            System.out.println(MovieDatabase.getTitle(r.getItem()) + "\t" + r.getValue());
+        }
+    }
+    
     public void printAverageRatings() throws Exception {
         int min = 2;
         String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings_short.csv";

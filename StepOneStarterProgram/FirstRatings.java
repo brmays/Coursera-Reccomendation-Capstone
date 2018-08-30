@@ -72,7 +72,7 @@ public class FirstRatings {
     public void testLoadRater() throws Exception{
         String fileName = "ratings.csv";
         HashMap<String, EfficientRater> raters = loadRater(fileName);  
-        System.out.println("There werw " + raters.size() + " raters.");
+        System.out.println("There were " + raters.size() + " raters.");
         String specRater = "193";
         ArrayList<String> maxRaters = maxRatings(raters);
         String specMovie = "1798709";

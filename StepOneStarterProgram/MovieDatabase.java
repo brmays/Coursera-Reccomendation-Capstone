@@ -24,7 +24,7 @@ public class MovieDatabase {
     private static void loadMovies(String filename) {
         FirstRatings fr = new FirstRatings();
         ArrayList<Movie> list = null;
-        System.out.println(filename);
+        
         try {
             list = fr.loadMovies(filename);
         }
