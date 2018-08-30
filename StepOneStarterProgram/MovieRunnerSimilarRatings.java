@@ -14,15 +14,15 @@ public class MovieRunnerSimilarRatings {
         int simRaters = 20;
         int minRatings = 5;
         
-        //String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings_short.csv";
-        //String movies = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratedmovies_short.csv";
+        String ratings = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratings.csv";
+        String movies = "/home/ben/Desktop/git/Coursera-Reccomendation-Capstone/StepOneStarterProgram/data/ratedmoviesfull.csv";
         
-        String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings.csv";
-        String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmoviesfull.csv";
+        //String ratings = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratings.csv";
+        //String movies = "C:\\git\\Coursera-Reccomendation-Capstone\\StepOneStarterProgram\\data\\ratedmoviesfull.csv";
         
+        FourthRatings fr = new FourthRatings();
         RaterDatabase.addRatings(ratings);
         MovieDatabase.initialize(movies);
-        FourthRatings fr = new FourthRatings();
         ArrayList<Rating> recMovies = fr.getSimilarRatings(raterID, simRaters, minRatings);
         
         System.out.println("The following movies are reccommended for Rater number: " + raterID);

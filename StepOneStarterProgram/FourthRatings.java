@@ -64,21 +64,29 @@ public class FourthRatings {
         ArrayList<Rating> recMovies = new ArrayList<Rating>();
         ArrayList<Rating> similarRaters = getSimilarities(id);
         System.out.println("Locations FourthRatings.getSimilarRatings, similarRaters size: " + similarRaters.size());
-        for (int i = similarRaters.size() - 1; i > similarRaters.size() - numSimilarRaters; i--) {
+        /*for (int i = 0; i < numSimilarRaters +1; i++) {
             Rating r = similarRaters.get(i);
             System.out.println("SAA, RaterID: " + r.getItem() + "  score: " + r.getValue());
-        }
+        }*/
         
-        ArrayList<String> myRatedMovies = new EfficientRater(id).getItemsRated();
+        Rater me = RaterDatabase.getRater(id);
+        ArrayList<String> myRatedMovies = me.getItemsRated();
         HashMap<String, ArrayList<Double>> movies = new HashMap<String, ArrayList<Double>>();
         ArrayList<Double> ratingsList = new ArrayList<Double>();
-        EfficientRater me = new EfficientRater(id);
-        
+        int counter = 0;
         for (int i = 0; i < numSimilarRaters; i++) {
-            EfficientRater curRater = new EfficientRater(similarRaters.get(i).getItem());
+            Rater curRater = RaterDatabase.getRater(similarRaters.get(i).getItem());
             ArrayList<String> curRatedMovies = curRater.getItemsRated();
+            //System.out.println("Printing out movie ids for rater: " + curRater.getID());
+            //System.out.println(curRatedMovies.size());
+            /*for (String s : curRatedMovies) {
+                System.out.println(s);
+            }*/
             for (String myMovie : myRatedMovies) {
                 if (curRatedMovies.contains(myMovie)) {
+                    if (myMovie=="2582846") {
+                        counter++;
+                    }
                     if (movies.containsKey(myMovie)) {
                         ArrayList<Double> curList = movies.get(myMovie);
                         curList.add(curRater.getRating(myMovie) * similarRaters.get(i).getValue());
@@ -107,7 +115,8 @@ public class FourthRatings {
         
         }
         Collections.sort(recMovies);
-        
+        Collections.reverse(recMovies);
+        System.out.println("Found that movie " + counter);
         return recMovies;
     }
     
@@ -161,10 +170,12 @@ public class FourthRatings {
         ArrayList<Rating> similarRaters = new ArrayList<Rating>();
         ArrayList<Rater> raters = RaterDatabase.getRaters();
         
+        Rater me = RaterDatabase.getRater(id);
+        
         for (Rater r : raters) {
             String curRater = r.getID();
             if (!curRater.equals(id)) {
-                int sim = dotProduct(RaterDatabase.getRater(id), RaterDatabase.getRater(curRater));
+                int sim = dotProduct(me, r);
                 if (sim >= 0) {
                     Rating newRating = new Rating(curRater, (double) sim);
                     similarRaters.add(newRating);
@@ -174,6 +185,7 @@ public class FourthRatings {
         
         
         Collections.sort(similarRaters);
+        Collections.reverse(similarRaters);
         return similarRaters;
     }
     
